@@ -1,0 +1,28 @@
+<button onclick="kirimWA()">Bagikan ke WhatsApp</button>
+
+<script>
+function kirimWA() {
+  if (!navigator.geolocation) {
+    alert("Browser tidak mendukung lokasi");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+
+      const pesan =
+        "Lokasi saya: https://www.google.com/maps?q=" + lat + "," + lon;
+
+      const wa =
+        "https://api.whatsapp.com/send?text=" + encodeURIComponent(pesan);
+
+      window.location.href = wa;
+    },
+    function(err) {
+      alert("Lokasi ditolak atau error");
+    }
+  );
+}
+</script>
